@@ -1,0 +1,7 @@
+<div class="container">
+  <table class="table-striped table-bordered">
+    <tr *ngFor="let description of descriptions; let i = index;">
+      <a class="btn btn-secondary" (click)="onClick(i)" role="button">{{description}}</a>
+    </tr>
+  </table>
+</div>
