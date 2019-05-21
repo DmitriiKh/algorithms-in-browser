@@ -4,6 +4,7 @@ import { SortArray } from '../model/sort-array';
 import { SortArrayQuick } from '../model/sort-array-quick';
 import { SortArrayBubble } from '../model/sort-array-bubble';
 import { SortArrayHeap } from '../model/sort-array-heap';
+import { SortArrayInsert } from '../model/sort-array-insert';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class SortArrayService implements SortArray {
 
   constructor() {
     this.sortArrayAlgorithms.push(new SortArrayBubble() as SortArray);
+    this.sortArrayAlgorithms.push(new SortArrayInsert() as SortArray);
     this.sortArrayAlgorithms.push(new SortArrayHeap() as SortArray);
     this.sortArrayAlgorithms.push(new SortArrayQuick() as SortArray);
     this.setCurrentIndex(0);
