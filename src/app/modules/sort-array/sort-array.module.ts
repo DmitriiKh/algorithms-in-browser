@@ -5,8 +5,6 @@ import { SortArrayPlayerComponent } from './components/sort-array-player/sort-ar
 import { SortArrayRoutingModule } from './sort-array-routing.module';
 import { SideMenuComponent } from 'src/app/shared/components/side-menu/side-menu.component';
 import { SortArrayMainComponent } from './components/sort-array-main/sort-array-main.component';
-import { SortArrayService } from './services/sort-array.service';
-import { CreateArrayService } from './services/create-array.service';
 
 @NgModule({
   declarations: [
@@ -18,10 +16,7 @@ import { CreateArrayService } from './services/create-array.service';
     CommonModule,
     SortArrayRoutingModule
   ],
-  providers: [
-    SortArrayService,
-    CreateArrayService
-  ],
+  providers: [],
   exports: [SortArrayRoutingModule]
 })
 export class SortArrayModule { }
