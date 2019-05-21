@@ -8,7 +8,7 @@ import { SortArrayHeap } from '../model/sort-array-heap';
 @Injectable({
   providedIn: 'root'
 })
-export class SortArrayService implements SortArray{
+export class SortArrayService implements SortArray {
   description: string;
   sortArrayAlgorithms: Array<SortArray> = [];
   currentIndex: number;
