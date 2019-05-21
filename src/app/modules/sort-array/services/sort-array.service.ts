@@ -8,23 +8,43 @@ import { SortArrayHeap } from '../model/sort-array-heap';
 @Injectable({
   providedIn: 'root'
 })
-export class SortArrayService {
+export class SortArrayService implements SortArray{
+  description: string;
   sortArrayAlgorithms: Array<SortArray> = [];
   currentIndex: number;
+  currentAlgorithm: SortArray;
+  inUse = false;
 
   constructor() {
     this.sortArrayAlgorithms.push(new SortArrayBubble() as SortArray);
     this.sortArrayAlgorithms.push(new SortArrayHeap() as SortArray);
     this.sortArrayAlgorithms.push(new SortArrayQuick() as SortArray);
-    this.currentIndex = 0;
+    this.setCurrentIndex(0);
+  }
+
+  init(array: number[]) {
+    this.currentAlgorithm.init(array);
+    this.inUse = true;
+  }
+
+  getArray() {
+    return this.currentAlgorithm.getArray();
+  }
+
+  takeStep() {
+    const finished = this.currentAlgorithm.takeStep();
+    if (finished) {
+      this.inUse = false;
+    }
+    return finished;
   }
 
   setCurrentIndex(index: number) {
-    this.currentIndex = index;
-  }
-
-  getCurrentAlgorithm() {
-    return this.sortArrayAlgorithms[this.currentIndex];
+    if (!this.inUse) {
+      this.currentIndex = index;
+      this.currentAlgorithm = this.sortArrayAlgorithms[this.currentIndex];
+      this.description = this.currentAlgorithm.description;
+    }
   }
 
   getDescriptions() {

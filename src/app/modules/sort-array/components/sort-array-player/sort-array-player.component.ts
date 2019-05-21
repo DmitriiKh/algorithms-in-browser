@@ -14,14 +14,11 @@ export class SortArrayPlayerComponent implements OnInit {
   array: Array<number> = [];
   interval: NodeJS.Timer;
   sorted = false;
-  inProcess = false;
-  sorterDescription = '';
 
   constructor(
     private creators: CreateArrayService,
     private sorters: SortArrayService
-    ) {
-   }
+    ) {}
 
   ngOnInit() {
     this.canvas = document.getElementById('player-canvas') as HTMLCanvasElement;
@@ -37,8 +34,6 @@ export class SortArrayPlayerComponent implements OnInit {
   }
 
   render() {
-    this.sorterDescription = this.sorters.getCurrentAlgorithm().description;
-
     // calculate scale for proportional rendering
     const scale = {
       x: this.canvas.width / this.array.length,
@@ -59,13 +54,11 @@ export class SortArrayPlayerComponent implements OnInit {
   }
 
   stepForward() {
-    const sorter = this.sorters.getCurrentAlgorithm();
-    const finished = sorter.takeStep();
-    this.array = sorter.getArray();
+    const finished = this.sorters.takeStep();
+    this.array = this.sorters.getArray();
     if (finished) {
       clearInterval(this.interval);
       this.sorted = true;
-      this.inProcess = false;
     }
     this.render();
   }
@@ -74,16 +67,14 @@ export class SortArrayPlayerComponent implements OnInit {
     if (this.sorted) {
       this.refresh();
     } else {
-      if (!this.inProcess) {
+      if (!this.sorters.inUse) {
       this.startAlgorithm();
       }
     }
   }
 
   startAlgorithm() {
-    this.inProcess = true;
-    const currentAlgorithm = this.sorters.getCurrentAlgorithm();
-    currentAlgorithm.init(this.array);
+    this.sorters.init(this.array);
     this.interval = setInterval(() => { this.stepForward(); }, 25);
   }
 
@@ -91,6 +82,5 @@ export class SortArrayPlayerComponent implements OnInit {
     this.createArray();
     this.render();
     this.sorted = false;
-    this.inProcess = false;
   }
 }
