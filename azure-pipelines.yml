@@ -24,8 +24,9 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)/dist'
-    Contents: '**'
+    Contents: '**/*'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    cleanTargetFolder: true
 
 - task: ArchiveFiles@2
   inputs:
@@ -34,3 +35,12 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 - task: PublishBuildArtifacts@1
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: '$(System.DefaultWorkingDirectory)/drop/drop/outpout'
+    azureSubscription: 'Pay-As-You-Go (719a89af-1e98-4514-b67b-5931451c695a)'
+    Destination: 'AzureBlob'
+    storage: 'ainb'
+    ContainerName: '1'
+    BlobPrefix: '$web'
