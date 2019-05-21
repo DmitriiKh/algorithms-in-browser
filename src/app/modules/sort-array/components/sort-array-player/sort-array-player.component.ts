@@ -16,9 +16,9 @@ export class SortArrayPlayerComponent implements OnInit {
   sorted = false;
 
   constructor(
-    private creators: CreateArrayService,
-    private sorters: SortArrayService
-    ) {}
+    public creators: CreateArrayService,
+    public sorters: SortArrayService
+    ) { }
 
   ngOnInit() {
     this.canvas = document.getElementById('player-canvas') as HTMLCanvasElement;
