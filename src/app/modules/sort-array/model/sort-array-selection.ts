@@ -4,7 +4,7 @@ import { SortArray } from './sort-array';
  * This file exports class which implements Array Select Sort
  */
 
-export default class SortArraySelection implements SortArray {
+export class SortArraySelection implements SortArray {
   description = 'Array Selection Sort';
   array: Array<number> = [];
   currentPosition: number;

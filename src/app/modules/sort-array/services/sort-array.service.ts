@@ -5,7 +5,7 @@ import { SortArrayQuick } from '../model/sort-array-quick';
 import { SortArrayBubble } from '../model/sort-array-bubble';
 import { SortArrayHeap } from '../model/sort-array-heap';
 import { SortArrayInsert } from '../model/sort-array-insert';
-import SortArraySelection from '../model/sort-array-selection';
+import { SortArraySelection } from '../model/sort-array-selection';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class SortArrayService implements SortArray {
   currentIndex: number;
   currentAlgorithm: SortArray;
   inUse = false;
+  timeInUseMsec = 0;
 
   constructor() {
     this.sortArrayAlgorithms.push(new SortArrayBubble() as SortArray);
@@ -29,6 +30,7 @@ export class SortArrayService implements SortArray {
   init(array: number[]) {
     this.currentAlgorithm.init(array);
     this.inUse = true;
+    this.timeInUseMsec = 0;
   }
 
   getArray() {
@@ -36,7 +38,13 @@ export class SortArrayService implements SortArray {
   }
 
   takeStep() {
+    const startTime = performance.now();
     const finished = this.currentAlgorithm.takeStep();
+    const endTime = performance.now();
+
+    // uddate time spent by algorithm
+    this.timeInUseMsec += endTime - startTime;
+
     if (finished) {
       this.inUse = false;
     }
