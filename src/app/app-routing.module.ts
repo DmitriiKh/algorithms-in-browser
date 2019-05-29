@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'sortArray', loadChildren: './modules/sort-array/sort-array.module#SortArrayModule'},
+  { path: 'sortArray', loadChildren: () => import('./modules/sort-array/sort-array.module').then(m => m.SortArrayModule)},
   { path: '**', component: PageNotFoundComponent }
 ];
 
