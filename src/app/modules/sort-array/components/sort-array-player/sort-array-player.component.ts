@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-
-import { CreateArrayService } from '../../services/create-array.service';
-import { SortArrayService } from '../../services/sort-array.service';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-sort-array-player',
   templateUrl: './sort-array-player.component.html',
   styleUrls: ['./sort-array-player.component.css']
 })
-export class SortArrayPlayerComponent implements OnInit {
+export class SortArrayPlayerComponent implements OnInit, OnChanges {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  array: Array<number> = [];
-  interval: NodeJS.Timer;
-  sorted = false;
+  initialized = false;
+  @Input() array: Array<number>;
+  // Angular will not fire ngOnChanges() for changes in the array.
+  // This is why we need arrayChanges
+  @Input() arrayChanges: number;
+  @Output() clickEventEmitter = new EventEmitter();
 
-  constructor(
-    public creators: CreateArrayService,
-    public sorters: SortArrayService
-    ) { }
+  constructor() { }
 
   ngOnInit() {
     this.canvas = document.getElementById('player-canvas') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
 
-    this.refresh();
+    // allow rendering on changes
+    this.initialized = true;
+    this.render();
   }
 
-  createArray() {
-    const creator = this.creators.getCurrentAlgorithm();
-    creator.createArray(500, 0, 100);
-    this.array = creator.getArray();
+  ngOnChanges() {
+    if (this.initialized) {
+      this.render();
+    }
   }
 
   render() {
@@ -53,34 +52,7 @@ export class SortArrayPlayerComponent implements OnInit {
     });
   }
 
-  stepForward() {
-    const finished = this.sorters.takeStep();
-    this.array = this.sorters.getArray();
-    if (finished) {
-      clearInterval(this.interval);
-      this.sorted = true;
-    }
-    this.render();
-  }
-
   onCanvasClick() {
-    if (this.sorted) {
-      this.refresh();
-    } else {
-      if (!this.sorters.inUse) {
-      this.startAlgorithm();
-      }
-    }
-  }
-
-  startAlgorithm() {
-    this.sorters.init(this.array);
-    this.interval = setInterval(() => { this.stepForward(); }, 25);
-  }
-
-  refresh() {
-    this.createArray();
-    this.render();
-    this.sorted = false;
+    this.clickEventEmitter.emit();
   }
 }

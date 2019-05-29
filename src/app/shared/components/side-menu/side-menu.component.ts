@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SortArrayService } from 'src/app/modules/sort-array/services/sort-array.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css']
 })
-export class SideMenuComponent implements OnInit {
-  descriptions = [];
+export class SideMenuComponent {
+  @Input() descriptions = [];
+  @Output() clickEventEmitter = new EventEmitter<number>();
 
-  constructor(public sorters: SortArrayService) {}
-
-  ngOnInit() {
-    this.descriptions = this.sorters.getDescriptions();
-  }
+  constructor() {}
 
   onClick(index: number) {
-    this.sorters.setCurrentIndex(index);
+    this.clickEventEmitter.emit(index);
   }
 }
