@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SortArray } from '../model/sort-array';
+import { ISortArrayAlgorithm } from '../model/sort-array';
 import { SortArrayQuick } from '../model/sort-array-quick';
 import { SortArrayBubble } from '../model/sort-array-bubble';
 import { SortArrayHeap } from '../model/sort-array-heap';
@@ -10,20 +10,20 @@ import { SortArraySelection } from '../model/sort-array-selection';
 @Injectable({
   providedIn: 'root'
 })
-export class SortArrayService implements SortArray {
+export class SortArrayService implements ISortArrayAlgorithm {
   description: string;
-  sortArrayAlgorithms: Array<SortArray> = [];
+  sortArrayAlgorithms: Array<ISortArrayAlgorithm> = [];
   currentIndex: number;
-  currentAlgorithm: SortArray;
+  currentAlgorithm: ISortArrayAlgorithm;
   inUse = false;
   timeInUseMsec = 0;
 
   constructor() {
-    this.sortArrayAlgorithms.push(new SortArrayBubble() as SortArray);
-    this.sortArrayAlgorithms.push(new SortArrayInsert() as SortArray);
-    this.sortArrayAlgorithms.push(new SortArraySelection() as SortArray);
-    this.sortArrayAlgorithms.push(new SortArrayHeap() as SortArray);
-    this.sortArrayAlgorithms.push(new SortArrayQuick() as SortArray);
+    this.sortArrayAlgorithms.push(new SortArrayBubble() as ISortArrayAlgorithm);
+    this.sortArrayAlgorithms.push(new SortArrayInsert() as ISortArrayAlgorithm);
+    this.sortArrayAlgorithms.push(new SortArraySelection() as ISortArrayAlgorithm);
+    this.sortArrayAlgorithms.push(new SortArrayHeap() as ISortArrayAlgorithm);
+    this.sortArrayAlgorithms.push(new SortArrayQuick() as ISortArrayAlgorithm);
     this.setCurrentIndex(0);
   }
 

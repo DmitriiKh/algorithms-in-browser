@@ -1,6 +1,6 @@
-import { CreateArray as CreateArray } from '../model/create-array';
+import { ICreateArrayAlgorithm } from '../model/create-array';
 
-export class CreateArrayRandomValue implements CreateArray {
+export class CreateArrayRandomValue implements ICreateArrayAlgorithm {
   description: 'Create Array with Random Values';
   array: Array<number>;
 

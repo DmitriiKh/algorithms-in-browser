@@ -1,6 +1,6 @@
-import { SortArray } from './sort-array';
+import { ISortArrayAlgorithm } from './sort-array';
 
-export class SortArrayQuick implements SortArray {
+export class SortArrayQuick implements ISortArrayAlgorithm {
   description = 'Array Quick Sort';
   array: Array<number> = [];
   sections: Array< {

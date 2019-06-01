@@ -1,4 +1,4 @@
-import { SortArray } from './sort-array';
+import { ISortArrayAlgorithm } from './sort-array';
 
 /**
  * This file exports class which implements Array Heap Sort
@@ -11,7 +11,7 @@ import { SortArray } from './sort-array';
  * - each parent is larger than it's children
  */
 
-export class SortArrayHeap implements SortArray {
+export class SortArrayHeap implements ISortArrayAlgorithm {
     description = 'Array Heap Sort';
     array: Array<number> = [];
     currentPosition: number;

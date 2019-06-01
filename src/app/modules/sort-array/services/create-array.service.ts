@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { CreateArray } from '../model/create-array';
+import { ICreateArrayAlgorithm } from '../model/create-array';
 import { CreateArrayRandomValue } from '../model/create-array-random-value';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateArrayService {
-  createArrayAlgorithms: Array<CreateArray> = [];
+  createArrayAlgorithms: Array<ICreateArrayAlgorithm> = [];
   currentIndex: number;
 
   constructor() {
-    this.createArrayAlgorithms.push(new CreateArrayRandomValue() as CreateArray);
+    this.createArrayAlgorithms.push(new CreateArrayRandomValue() as ICreateArrayAlgorithm);
     this.currentIndex = 0;
   }
 

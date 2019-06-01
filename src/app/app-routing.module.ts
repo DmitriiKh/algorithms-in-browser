@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'sortArray', loadChildren: () => import('./modules/sort-array/sort-array.module').then(m => m.SortArrayModule)},
+  { path: 'trees', loadChildren: () => import('./modules/trees/trees.module').then(m => m.TreesModule)},
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,10 +1,10 @@
-import { SortArray } from './sort-array';
+import { ISortArrayAlgorithm } from './sort-array';
 
 /**
  * This file exports class which implements Array Insert Sort
  */
 
-export class SortArrayInsert implements SortArray {
+export class SortArrayInsert implements ISortArrayAlgorithm {
   description = 'Array Insert Sort';
   array: Array<number> = [];
   currentElementIndex: number;

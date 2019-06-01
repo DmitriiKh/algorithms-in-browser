@@ -1,10 +1,10 @@
-import { SortArray } from './sort-array';
+import { ISortArrayAlgorithm } from './sort-array';
 
 /**
  * This file exports class which implements Array Bubble Sort
  */
 
-export class SortArrayBubble implements SortArray {
+export class SortArrayBubble implements ISortArrayAlgorithm {
   description = 'Array Bubble Sort';
   array: Array<number> = [];
 
