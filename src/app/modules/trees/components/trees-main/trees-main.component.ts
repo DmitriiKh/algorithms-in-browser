@@ -28,7 +28,7 @@ export class TreesMainComponent implements OnInit {
 
   createTree() {
     const creator = this.creators.getCurrentAlgorithm();
-    creator.createTree(500);
+    creator.createTree(100);
     this.root = creator.getTree();
   }
 
