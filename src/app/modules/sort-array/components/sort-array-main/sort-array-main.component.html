@@ -15,8 +15,8 @@
         <app-sort-array-player [array]="array" [arrayChanges]="arrayChanges" (clickEventEmitter)="onPlayerClick()">
         </app-sort-array-player>
 
-        <p>"{{sorters.description}}" is selected. Time in use (msec): {{sorters.timeInUseMsec}}</p>
-
+        <p>"{{ sorters.description }}" is selected. Time in use (msec): {{ sorters.timeInUseMsec | number: '1.2-2' }}
+        </p>
       </div>
 
       <app-side-menu [descriptions]="descriptions" (clickEventEmitter)="onSideMenuClick($event)"></app-side-menu>
