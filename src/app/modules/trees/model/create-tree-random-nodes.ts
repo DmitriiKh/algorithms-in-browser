@@ -32,15 +32,27 @@ export class CreateTreeRandomNodes implements ICreateTreeAlgorithm<number> {
         leftChild: null,
         rightChild: null
       };
-      // randomly choose a leave to add a new node
+      // randomly choose a leaf to add a new node
       const currentLeafIndex = Math.floor(Math.random() * leaves.length);
       const currentLeaf = leaves[currentLeafIndex];
       // randomly choose left or right child for a new node
       const child = Math.floor(Math.random() * 2);
       if (child === 0) {
-        currentLeaf.leftChild = newNode;
+        if (currentLeaf.leftChild === null) {
+          // if chosen child available
+          currentLeaf.leftChild = newNode;
+        } else {
+          // if chosen child not available
+          currentLeaf.rightChild = newNode;
+        }
       } else {
-        currentLeaf.rightChild = newNode;
+        if (currentLeaf.rightChild === null) {
+          // if chosen child available
+          currentLeaf.rightChild = newNode;
+        } else {
+          // if chosen child not available
+          currentLeaf.leftChild = newNode;
+        }
       }
       // if currentLeaf has both children remove it from leaves
       if (currentLeaf.leftChild !== null && currentLeaf.rightChild !== null) {

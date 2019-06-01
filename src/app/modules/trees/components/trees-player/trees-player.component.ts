@@ -35,7 +35,7 @@ export class TreesPlayerComponent implements OnInit, OnChanges {
 
   render() {
     // calculate number of levels
-    const treeDepth = 3;
+    const treeDepth = 35;
 
     // calculate node radius for proportional rendering
     const nodeRadius = this.canvas.height / ((treeDepth + 1) * 2);
