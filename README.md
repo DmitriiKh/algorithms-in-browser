@@ -1,5 +1,7 @@
 # AlgorithmsInBrowser
 
+Live demo https://ainb.z27.web.core.windows.net/
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
 ## Development server
